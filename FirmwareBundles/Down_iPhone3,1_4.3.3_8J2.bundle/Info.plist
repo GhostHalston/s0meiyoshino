@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DownloadUrl</key>
+	<string></string>
+	<key>Filename</key>
+	<string>iPhone3,1_4.3.3_8J2_Restore.ipsw</string>
+	<key>FilesystemPatches</key>
+	<dict/>
+	<key>FirmwarePatches</key>
+	<dict>
+		<key>Restore Ramdisk</key>
+		<dict>
+			<key>File</key>
+			<string>038-1449-003.dmg</string>
+			<key>TypeFlag</key>
+			<integer>8</integer>
+		</dict>
+		<key>iBSS</key>
+		<dict>
+			<key>File</key>
+			<string>Firmware/dfu/iBSS.n90ap.RELEASE.dfu</string>
+			<key>IV</key>
+			<string>cdd50b45ca1bac4f718d9eb23ce9f0a8</string>
+			<key>Key</key>
+			<string>8ef00005aa2c01ae409d55e330171589af79d76ac86639e76003835d5d82ffc4</string>
+			<key>Patch</key>
+			<string>iBSS.n90ap.RELEASE.patch</string>
+			<key>TypeFlag</key>
+			<integer>8</integer>
+		</dict>
+	</dict>
+	<key>Name</key>
+	<string>iPhone3,1_4.3.3_8J2_Restore</string>
+	<key>Platform</key>
+	<integer>1</integer>
+	<key>RamdiskMountVolume</key>
+	<string>ramdisk</string>
+	<key>RamdiskOptionsPath</key>
+	<string>/usr/local/share/restore/options.plist</string>
+	<key>RamdiskPatches</key>
+	<dict>
+		<key>asr</key>
+		<dict>
+			<key>File</key>
+			<string>usr/sbin/asr</string>
+			<key>Patch</key>
+			<string>asr.patch</string>
+		</dict>
+	</dict>
+	<key>RootFilesystem</key>
+	<string>038-1423-003.dmg</string>
+	<key>RootFilesystemKey</key>
+	<string>246f17ec6660672b3207ece257938704944a83601205736409b61fc3565512559abd0f82</string>
+	<key>RootFilesystemMountVolume</key>
+	<string>Durango8J2.N90OS</string>
+	<key>RootFilesystemSize</key>
+	<integer>950</integer>
+	<key>SHA1</key>
+	<string>b2e221543f24a66209c70e8465d037fe22afeefa</string>
+	<key>SubPlatform</key>
+	<integer>6</integer>
+</dict>
+</plist>

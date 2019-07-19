@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "**** s0meiyoshino v3.5.5 installer ****"
+echo "**** s0meiyoshino v4.0 alpha-2 installer ****"
 ## if [ -e "odysseus" ]; then
 ## echo "Odysseus already exist"
 ## else
@@ -18,10 +18,6 @@ CB=0
 DD=0
 EE=0
 FF=0
-
-if [ ! -d "shsh" ]; then
-    mkdir shsh
-fi
 
 if [ ! -d "src/iPhone3,1/11D257" ]; then
     mkdir src/iPhone3,1/11D257/

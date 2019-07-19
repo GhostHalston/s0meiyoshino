@@ -1,31 +1,26 @@
 #!/bin/bash
 
 
-echo "****************** s0meiyoshino v3.5.8 make_ipsw ******************"
-echo ""
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!  WARNING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo "!!This tool uses iOS 7 iBoot vulnerability. USE AT YOUR OWN RISK !!"
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo ""
+echo "****************** s0meiyoshino v4.0 alpha-5 make_ipsw ******************"
 
 if [ $# == 1 ]; then
     if [ $1 = "--help" ];then
         echo "**HOW TO USE**"
         echo "./make_ipsw.sh <device model> <downgrade-iOS> <base-iOS> [arg1]"
         echo ""
-        echo "If you select iOS 4.3.5, the value of \"cs_enforcement_disable=1 amfi=0xff -v\" will be forced into boot-args."
+        echo "If you select iOS 4.3.x, the value of \"cs_enforcement_disable=1 amfi=0xff -v\" will be forced into boot-args."
         echo "This will be resolved in a future update."
         echo ""
         echo "[OPTION]"
-        echo "  --verbose               : [arg1] Enable verbose boot (for iOS 5+)"
+        echo "  --verbose               : [arg1] Enable verbose boot (for iOS 5 or later)"
         echo "                            *Inject Boot-args=\"-v\" to iBoot."
         echo "  ----csdisable           : [arg1] Inject cs_disable into boot-args"
         echo "                            *Inject Boot-args=\"cs_enforcement_disable=1 amfi=0xff\" to iBoot. (for iOS 5/6)"
-        echo "                            *Inject Boot-args=\"cs_enforcement_disable=1 amfi_get_out_of_my_way=1\" to iBoot. (for iOS 7+)"
+        echo "                            *Inject Boot-args=\"cs_enforcement_disable=1 amfi_get_out_of_my_way=1\" to iBoot. (for iOS 7 or later)"
         echo "  ----verbose-csdisable   : [arg1] Enable verbose boot and inject cs_disable into boot-args"
         echo "                            *Inject Boot-args \"cs_enforcement_disable=1 amfi=0xff -v\" (for iOS 4/5/6)"
-        echo "                            *Inject Boot-args \"cs_enforcement_disable=1 amfi_get_out_of_my_way=1 -v\" (for iOS 7+)"
-        echo "                            *iOS 4.3.5 enforces this option."
+        echo "                            *Inject Boot-args \"cs_enforcement_disable=1 amfi_get_out_of_my_way=1 -v\" (for iOS 7 or later)"
+        echo "                            *iOS 4.3.x enforces this option."
         echo "  --jb                    : [arg1] Jailbreak iOS 9.x (iPhone5,2 only) [BETA]"
         echo "                            *This jailbreak is \"UNTETHERED\" jailbreak."
         echo "                            *Untether is provided by iBoot vulnerability."
@@ -45,14 +40,29 @@ if [ $# == 1 ]; then
         echo "./make_ipsw.sh --help"
         exit
     fi
+
+    if [ $1 = "--n88help" ];then
+        echo "**HOW TO USE**"
+        echo "./make_ipsw.sh iPhone2,1 <downgrade-iOS> <Bootrom_version>"
+        echo ""
+        echo "[Bootrom_version]"
+        echo "  --oldBR             : Old Bootrom (Bootrom 359.3). This device uses \"0x24000 Segment Overflow\" for downgrade."
+        echo "  --newBR             : New Bootrom (Bootrom 359.3.2). This device uses \"alloc8 exploit\" for downgrade."
+        echo ""
+        echo "[example]"
+        echo "./make_ipsw.sh iPhone2,1 3.0 --oldBR"
+        echo "./make_ipsw.sh iPhone2,1 6.1.6 --newBR"
+        exit
+    fi
+
 fi
 
 
 if [ $# -lt 3 ]; then
-    echo "**HOW TO USE**"
+    echo "**HOW TO USE** (iPhone 4 or later)"
     echo "./make_ipsw.sh <device model> <downgrade-iOS> <base-iOS> [arg1]"
     echo ""
-    echo "[OPTION]"
+    echo "[OPTION] (for iOS 5 or later)"
     echo "  --verbose       : [arg1] Enable verbose boot"
     echo "  --jb            : [arg1] Jailbreak iOS 9.x (iPhone5,2 only)[BETA]"
     echo "  --remove        : [arg1] Remove exploit (iPhone3,1 only)"
@@ -62,10 +72,35 @@ if [ $# -lt 3 ]; then
     echo ""
     echo "[Show detailed help]"
     echo "./make_ipsw.sh --help"
+    echo ""
+    echo "[Show 3GS help]"
+    echo "./make_ipsw.sh --n88help"
     exit
 fi
 
 Remove_Exploit=0
+
+if [ $1 = "iPhone2,1" ]; then
+    if [ $# != 3 ]; then
+        echo "[ERROR] Bad arguments"
+        exit
+    fi
+
+    if [ $3 != "--oldBR" ] && [ $3 != "--newBR" ]; then
+        echo "[ERROR] Bad arguments"
+        exit
+    fi
+
+bin/3gs_make.sh $2 $3
+
+    exit
+fi
+
+echo ""
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!  WARNING  !!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "!!This tool uses iOS 7 iBoot vulnerability. USE AT YOUR OWN RISK !!"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo ""
 
 if [ $# == 4 ]; then
     if [ $4 != "--verbose" ] && [ $4 != "--jb" ] && [ $4 != "--remove" ] && [ $4 != "----csdisable" ] && [ $4 != "----verbose-csdisable" ]; then
@@ -204,6 +239,49 @@ BundleType="Down"
 
 #### iPhone 4 ####
 if [ $Identifier = "iPhone3,1" ]; then
+
+####if [ $2 = "4.0" ]; then
+########iOSLIST="4"
+########iOSVersion="4.0_8A293"
+########iOSBuild="8A293"
+########RestoreRamdisk="018-6306-403.dmg"
+########iBoot_IV="127785de92315f6921e8ecd0d2ca35f2"
+########iBoot_Key="2d995cd307840ab0ef2369775aa9d00605ac0df7160b68933404dfbe2e1fe969"
+########DD=1
+####fi
+
+####if [ $2 = "4.2" ]; then
+########iOSLIST="4"
+########iOSVersion="4.2_8C134"
+########iOSBuild="8C134"
+########RestoreRamdisk="018-9746-004.dmg"
+########iBoot_IV="dadfae4f4967eff4f149b606cbe34060"
+########iBoot_Key="65b69a67acc72771aea43b15b70a566139a42257bdab7659cdab1ab2537713af"
+########DD=1
+####fi
+
+    if [ $2 = "4.3.3" ]; then
+        #### iOS 4.3.3 ####
+        ## iBoot-1072.61~2
+        iOSLIST="4"
+        iOSVersion="4.3.3_8J2"
+        iOSBuild="8J2"
+        RestoreRamdisk="038-1449-003.dmg"
+        iBoot_IV="bb3fc29dd226fac56086790060d5c744"
+        iBoot_Key="c2ead1d3b228a05b665c91b4b1ab54b570a81dffaf06eaf1736767bcb86e50de"
+        DD=1
+    fi
+
+    if [ $2 = "4.3.4" ]; then
+        ## iBoot-1072.61~6
+        iOSLIST="4"
+        iOSVersion="4.3.4_8K2"
+        iOSBuild="8K2"
+        RestoreRamdisk="038-2174-001.dmg"
+        iBoot_IV="986032eecd861c37ca2a86b6496a3c0d"
+        iBoot_Key="b4e300c54a9dd2e648ead50794e9bf2205a489c310a1c70a9fae687368229468"
+        DD=1
+    fi
 
     if [ $2 = "4.3.5" ]; then
         #### iOS 4.3.5 ####

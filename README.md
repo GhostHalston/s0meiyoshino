@@ -1,5 +1,5 @@
-<h1>s0meiyoshino v3.5.8~2</h1>
-<p>It is a downgrade and untethered jailbreak tool to iOS 4-9 that exploited the boot chain of iOS 7 iBoot using @xerub's De Rebus Antiquis.</p>
+<h1>s0meiyoshino v4.0 alpha-5</h1>
+<p>It is a downgrade and untethered jailbreak tool to iOS 3-10 that exploited the boot chain.</p>
 <p>Operation confirmed with OS X 10.10.5 and MacOS 10.13.5. It may <s>not</s> work??? in 10.14. <s>Please downgrade to High Sierra.</s></p>
 <p>Please secure about 10 GB of free space.</p>
 <br/>
@@ -15,9 +15,17 @@
 <p>wget</p>
 <br/>
 <h2>Supported version</h2>
+<h3>iPhone 3GS (iPhone2,1)</h3>
+<p>*Downgrade only</p>
+<p>iPhoneOS 3: 3.0</p>
+<p>iOS 4: --</p>
+<p>iOS 5: --</p>
+<p>iOS 6: 6.1.6</p>
+<br/>
 <h3>iPhone 4 (iPhone3,1)</h3>
 <p>*Downgrade only</p>
-<p>iOS 4: 4.3.5</p>
+<p>iOS 4: 4.3.3 - 4.3.5</p>
+<p>Downgrade method below 4.3.3: <a href="https://diosra2.hatenadiary.jp/entry/20190619/1560873405">Untethered downgrade using iBoot on iOS 7</a></p>
 <p>iOS 5: 5.1.1 (9B206)</p>
 <p>iOS 6: 6.0 - 6.1.3</p>
 <p>iOS 7: 7.0 - 7.1.2</p>
@@ -27,11 +35,12 @@
 <p>But, downgrade target SHSH is unnecessary!</p>
 <br/>
 <p>*Downgrade only</p>
-<p>iOS 6: 6.0 - 6.1.2, 6.1.4</p>
-<p>iOS 7: 7.0 - 7.1.2</p>
-<p>iOS 8: 8.0.2</p>
+<p>iOS 6 : 6.0 - 6.1.2, 6.1.4</p>
+<p>iOS 7 : 7.0 - 7.1.2</p>
+<p>iOS 8 : 8.0.2</p>
 <p>*Downgrade and untethered jailbreak</p>
-<p>iOS 9: 9.0 - 9.3.5</p>
+<p>iOS 9 : 9.0 - 9.3.5</p>
+<p>iOS 10: 10.3.3</p>
 <br/>
 <h3>iPhone 5 (iPhone5,1)</h3>
 <p>*Downgrade only</p>
@@ -48,13 +57,21 @@
 ./install.sh<br/>
 <br/>
 <h3>make ipsw</h3>
-<p>./make_ipsw.sh [device model] [downgrade-iOS] [base-iOS] [args]<br/>
+<p>./make_ipsw.sh [device model] [downgrade-iOS] [base-iOS] [args]</p><br/>
 <p></p>
 <p>[OPTION]</p>
 <p>--verbose                 : Inject Boot-args "-v"</p>
 <p>--jb                      : Jailbreak iOS (iPhone5,2 9.x only) (BETA)</p>
 <p></p>
 <p>example: ./make_ipsw.sh iPhone5,2 6.1.4 7.0.4 --verbose</p>
+<br/>
+<h3>How to use (iPhone 3GS)</h3>
+<h4>Make CFW</h4>
+<p>./make_ipsw.sh iPhone2,1 [downgrade-iOS] [Bootrom version]</p>
+<h4>Restore</h4>
+<p>Put in device "DFU mode".</p>
+<p>after, run sh</p>
+<p>./restore3gs.sh</p>
 <br/>
 <h3>Restore (iPhone 4)</h3>
 <p>First, put in device "DFU mode".</p>
@@ -102,6 +119,7 @@
 <p>@daytonhasty for <a href="https://dayt0n.com/articles/Odysseus/">Odysseus</a></p>
 <p>@libimobiledev for idevicerestore</p>
 <p>@planetbeing for xpwn</p>
-<p>@axi0mX for <a href="https://github.com/axi0mX/ipwndfu">ipwndfu</a></p>
+<p>@axi0mX for <a href="https://github.com/axi0mX/ipwndfu">ipwndfu</a>, alloc8 exploit</p>
 <p>@posixninja and @pod2g for SHAtter exploit</p>
+<p>iPhone Dev Team for 0x24000 Segment Overflow</p>
 <br/>
